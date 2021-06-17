@@ -12,12 +12,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "professor")
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Professor {
 
 	@Id
@@ -34,39 +38,8 @@ public class Professor {
 	private Departament departament;
 	
 	@OneToMany(mappedBy = "professor")
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
 	private List<Allocation> allocations;
 		
-	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Departament getDepartament() {
-		return departament;
-	}
-
-	public void setDepartament(Departament departament) {
-		this.departament = departament;
-	}
-	
 }

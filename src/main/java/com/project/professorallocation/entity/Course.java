@@ -10,13 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "course")
 @NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Course {
 	
 	@Id
@@ -27,23 +29,8 @@ public class Course {
 	private String name;
 	
 	@OneToMany(mappedBy = "course")
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
 	private List<Allocation> allocations;
-	
-	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 	
 }
