@@ -19,7 +19,7 @@ import lombok.ToString;
 @Table(name = "departament")
 @NoArgsConstructor
 @Data
-public class Departament {
+public class Department {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

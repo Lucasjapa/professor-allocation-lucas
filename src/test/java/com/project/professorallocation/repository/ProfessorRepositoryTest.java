@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
+import com.project.professorallocation.entity.Allocation;
 import com.project.professorallocation.entity.Professor;
 
 @DataJpaTest
@@ -21,6 +22,8 @@ public class ProfessorRepositoryTest {
 	
 	@Autowired
 	private ProfessorRepository professorRepository;
+	@Autowired
+	private AllocationRepository allocationRepository;
 	
 	@Test
 	void testCreate()
@@ -49,6 +52,17 @@ public class ProfessorRepositoryTest {
 		Optional<Professor> optional = professorRepository.findById(id);
 		
 		Professor p = optional.orElse(null); 
+	}
+	
+	@Test
+	void test3()
+	{
+		//Find byID (CRUD)
+		
+		List<Allocation> allocations = allocationRepository.findByProfessorNameIgnoreCase("lucas");
+		
+		System.out.println();
+		
 	}
 
 }

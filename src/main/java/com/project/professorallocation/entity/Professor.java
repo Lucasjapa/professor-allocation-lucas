@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,6 @@ import lombok.ToString;
 @Entity
 @Table(name = "professor")
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class Professor {
 
@@ -35,7 +33,7 @@ public class Professor {
 	private String name;
 	
 	@ManyToOne(optional = false)
-	private Departament departament;
+	private Department departament;
 	
 	@OneToMany(mappedBy = "professor")
 	@ToString.Exclude
