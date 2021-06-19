@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -33,8 +36,9 @@ public class Professor {
 	private String name;
 	
 	@ManyToOne(optional = false)
-	private Department departament;
+	private Department department;
 	
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy = "professor")
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude

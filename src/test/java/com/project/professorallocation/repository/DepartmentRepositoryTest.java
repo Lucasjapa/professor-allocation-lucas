@@ -11,71 +11,71 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
-import com.project.professorallocation.entity.Course;
+import com.project.professorallocation.entity.Department;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
 @TestPropertySource(locations = "classpath:application.properties")
-public class CourseRepositoryTest {
+public class DepartmentRepositoryTest {
 
 	@Autowired
-	private CourseRepository courseRepository;
+	private DepartmentRepository departmentRepository;
 	
 	@Test
 	public void testCreate(){
 		
 		//Arrange
-		Course course = new Course();
-		course.setName("bina");
+		Department department = new Department();
+		department.setName("corrida");
 		
 		// Act
-		course = courseRepository.save(course);
+		department = departmentRepository.save(department);
 		
 		// Print
-		System.out.println(course);
+		System.out.println(department);
 	}
 	
 	@Test
 	public void testRead(){
 		
 		//Arrange
-		Long id = 1L;
+		Long id = 4L;
 				
 		// Act
-		List<Course> course = courseRepository.findAll();
-		Optional<Course> courseByID = courseRepository.findById(id);
+		List<Department> department = departmentRepository.findAll();
+		Optional<Department> departmentByID = departmentRepository.findById(id);
 		
 		// Print
 		System.out.println("-------------");
-		System.out.println(courseByID);
+		System.out.println(departmentByID);
 		System.out.println("-------------");
-		System.out.println(course);
+		System.out.println(department);
 	}
 	
 	@Test
 	public void testUpdate(){
 		
 		//Arrange
-		Course course = new Course();
-		course.setId(1L);
-		course.setName("Matemática");
+		Department department = new Department();
+		department.setId(5L);
+		department.setName("Matemática");
 		
 		// Act
-		course = courseRepository.save(course);
+		department = departmentRepository.save(department);
 		
 		// Print
-		System.out.println(course);
+		System.out.println(department);
 	}
 	
 	@Test
 	public void testDeleteById(){
 		
 		//Arrange
-		Long id = 1L;
+		Long id = 6L;
 		
 		// Act
-		courseRepository.deleteById(id);
+		departmentRepository.deleteById(id);
 	
 	}
 	
@@ -83,7 +83,7 @@ public class CourseRepositoryTest {
 	public void testDeleteAll(){
 		
 		// Act
-		courseRepository.deleteAll();
+		departmentRepository.deleteAll();
 	
 	}
 }

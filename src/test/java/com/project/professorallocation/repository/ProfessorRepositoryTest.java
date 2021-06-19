@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 
-import com.project.professorallocation.entity.Allocation;
+import com.project.professorallocation.entity.Department;
 import com.project.professorallocation.entity.Professor;
 
 @DataJpaTest
@@ -23,46 +23,79 @@ public class ProfessorRepositoryTest {
 	@Autowired
 	private ProfessorRepository professorRepository;
 	@Autowired
-	private AllocationRepository allocationRepository;
+	private DepartmentRepository departmentRepository;
 	
 	@Test
 	void testCreate()
 	{
-		//FindAll Read (CRUD)
-		List<Professor> professors = professorRepository.findAll();
+		//Arrange
+		Department department = departmentRepository.getById(1L);
 		
-		System.out.println(professors);
+		Professor professor = new Professor();
+		professor.setName("Amirton");
+		professor.setCpf("11122233310");
+		professor.setDepartment(department);
+		
+		// Act
+		professor = professorRepository.save(professor);
+
+		// Print
+		System.out.println(professor);
 	}
 	
 	@Test
-	void testCourse()
+	void testUpdate()
 	{
-		//FindAll Read (CRUD)
-		List<Professor> professors = professorRepository.findAll();
+		//Arrange
+		Department department = departmentRepository.getById(2L);
 		
-		System.out.println(professors);
+		Professor professor = professorRepository.getById(1L);
+		professor.setName("Pedro");
+		professor.setCpf("11122233319");
+		professor.setDepartment(department);
+		
+		// Act
+		professor = professorRepository.save(professor);
+
+		// Print
+		System.out.println(professor);
 	}
 	
 	@Test
-	void test2()
-	{
-		//Find byID (CRUD)
+	public void testRead(){
+		
+		//Arrange
 		Long id = 1L;
+				
+		// Act
+		List<Professor> professor = professorRepository.findAll();
+		Optional<Professor> professorByID = professorRepository.findById(id);
+		//Optional<Professor> professorByName = professorRepository.findByNameContainingIgnoreCase(name);
 		
-		Optional<Professor> optional = professorRepository.findById(id);
-		
-		Professor p = optional.orElse(null); 
+		// Print
+		System.out.println("-------------");
+		System.out.println(professorByID.orElse(null));
+		System.out.println("-------------");
+		System.out.println(professor);
 	}
 	
 	@Test
-	void test3()
-	{
-		//Find byID (CRUD)
+	public void testDeleteById(){
 		
-		List<Allocation> allocations = allocationRepository.findByProfessorNameIgnoreCase("lucas");
+		//Arrange
+		Long id = 2L;
 		
-		System.out.println();
+		// Act
+		professorRepository.deleteById(id);
+	
+	}
+	
+	@Test
+	public void testDeleteAll(){
 		
+		// Act
+		professorRepository.deleteAll();
+	
 	}
 
 }
