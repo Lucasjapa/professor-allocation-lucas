@@ -61,6 +61,7 @@ public class AllocationRepositoryTest {
 		Professor professor = professorRepository.getById(5L);
 		Course course = courseRepository.getById(1L);
 		
+		// Eu não mostro esse método porque ele lança uma exceção caso o ID não exista, mas muito bom por olhar os outros métodos
 		Allocation allocation = allocationRepository.getById(1L);
 		allocation.setDayOfWeek(DayOfWeek.THURSDAY);
 		allocation.setStart(sdf.parse("11:20"));
@@ -84,6 +85,8 @@ public class AllocationRepositoryTest {
 		// Act
 		List<Allocation> allocation = allocationRepository.findAll();
 		Optional<Allocation> allocationByID = allocationRepository.findById(id);
+		// Acredito que tenha sido no automático e por isso comentou, mas essa linha não faz sentido nenhum.
+		// Inclusive pode apagar.
 		//Optional<allocation> allocationByName = allocationRepository.findByNameContainingIgnoreCase(name);
 		
 		// Print
