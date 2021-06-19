@@ -84,7 +84,6 @@ public class AllocationRepositoryTest {
 		// Act
 		List<Allocation> allocation = allocationRepository.findAll();
 		Optional<Allocation> allocationByID = allocationRepository.findById(id);
-		//Optional<allocation> allocationByName = allocationRepository.findByNameContainingIgnoreCase(name);
 		
 		// Print
 		System.out.println("-------------");

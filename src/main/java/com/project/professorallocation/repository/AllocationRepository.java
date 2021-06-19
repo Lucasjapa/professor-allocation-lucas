@@ -11,9 +11,9 @@ import com.project.professorallocation.entity.Allocation;
 public interface AllocationRepository extends JpaRepository<Allocation, Long> {
 
 	//Search allocations for professor
-	List<Allocation> findByProfessorNameIgnoreCase(String professorName);
+	List<Allocation> findByProfessorId(Long id);
 	
 	//Search allocations for course
-	List<Allocation> findByCourseNameIgnoreCase(String courseName);
+	List<Allocation> findByCourseId(Long id);
 	
 }
