@@ -29,11 +29,11 @@ public class ProfessorRepositoryTest {
 	void testCreate()
 	{
 		//Arrange
-		Department department = departmentRepository.getById(1L);
+		Department department = departmentRepository.getById(2L);
 		
 		Professor professor = new Professor();
 		professor.setName("Amirton");
-		professor.setCpf("11122233310");
+		professor.setCpf("11122233323");
 		professor.setDepartment(department);
 		
 		// Act
