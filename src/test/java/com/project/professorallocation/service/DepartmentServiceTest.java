@@ -7,24 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
-import com.project.professorallocation.entity.Course;
+import com.project.professorallocation.entity.Department;
 
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application.properties")
-public class CourseServiceTest {
+public class DepartmentServiceTest {
 
 	@Autowired
-	private CourseService courseService;
+	private DepartmentService departmentService;
 	
 	@Test
 	public void create() throws Exception {
 		try {
-		Course course = new Course();
-		course.setName("bina");
-		courseService.create(course);
+		Department department = new Department();
+		department.setName("teste");
+		departmentService.create(department);
 		
 		// Print
-		System.out.println(course);
+		System.out.println(department);
 		
 		}
 		catch(Exception e) {
@@ -35,13 +35,13 @@ public class CourseServiceTest {
 	@Test
 	public void update() throws Exception {
 		try {
-		Course course = new Course();
-		course.setId(4L);
-		course.setName("test");
-		courseService.update(course);
+		Department department = new Department();
+		department.setId(1L);
+		department.setName("futebol");
+		departmentService.update(department);
 		
 		// Print
-		System.out.println(course);
+		System.out.println(department);
 		
 		}
 		catch(Exception e) {
@@ -52,12 +52,12 @@ public class CourseServiceTest {
 	@Test
 	public void readyById() throws Exception {
 		try {
-		Course course = new Course();
+		Department department = new Department();
 		
-		course = courseService.findById(4L);
+		department = departmentService.findById(1L);
 		
 		// Print
-		System.out.println(course);
+		System.out.println(department);
 		
 		}
 		catch(Exception e) {
@@ -68,10 +68,10 @@ public class CourseServiceTest {
 	@Test
 	public void readyAll(){
 		
-		List<Course> course = courseService.findAll();
+		List<Department> department = departmentService.findAll();
 		
 		// Print
-		System.out.println(course);
+		System.out.println(department);
 		
 	}
 	
@@ -79,7 +79,7 @@ public class CourseServiceTest {
 	public void deletedById(){
 		
 		try {
-			courseService.deleteById(1L);
+			departmentService.deleteById(1L);
 
 			// Print
 			System.out.println("Deletado com sucesso");
@@ -93,7 +93,8 @@ public class CourseServiceTest {
 	@Test
 	public void deletedALL(){
 		
-		courseService.deleteALL();
+		departmentService.deleteALL();
 	}
 
 }
+

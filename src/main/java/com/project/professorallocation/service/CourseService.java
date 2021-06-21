@@ -9,7 +9,7 @@ import com.project.professorallocation.entity.Course;
 import com.project.professorallocation.repository.CourseRepository;
 
 import lombok.RequiredArgsConstructor;
-import util.CourseValidators;
+import validations.CourseValidator;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +21,7 @@ public class CourseService {
 	public Course create(Course course) throws Exception {
 		
 		course.setId(null);
-		CourseValidators.validateName(course);
+		CourseValidator.validateName(course);
 		
 		return saveInternal(course);
 	}
@@ -30,9 +30,10 @@ public class CourseService {
 	//---------------UPDATE---------------
 	public Course update(Course course) throws Exception {
 		
-		CourseValidators.checkCourseExistById(course, courseRepository.existsById(course.getId()));
+		CourseValidator.checkCourseExistById(course, courseRepository.existsById(course.getId()));
+		CourseValidator.validateName(course);
 		
-		return courseRepository.save(course);
+		return saveInternal(course);
 	}
 	//------------------------------------
 
@@ -45,7 +46,7 @@ public class CourseService {
 	public Course findById(Long id) throws Exception {
 		
 		Optional<Course> course = courseRepository.findById(id);
-		CourseValidators.checkCourseExist(course);
+		CourseValidator.checkCourseExist(course);
 		
 		return course.orElse(null);
 	}
@@ -55,7 +56,7 @@ public class CourseService {
 	public void deleteById(Long id) throws Exception {
 		
 		Optional<Course> course = courseRepository.findById(id);
-		CourseValidators.checkCourseExist(course);
+		CourseValidator.checkCourseExist(course);
 		
 		courseRepository.deleteById(id);
 	}
@@ -68,5 +69,4 @@ public class CourseService {
 	private Course saveInternal(Course course) {
         return courseRepository.save(course);
     }
-	
 }

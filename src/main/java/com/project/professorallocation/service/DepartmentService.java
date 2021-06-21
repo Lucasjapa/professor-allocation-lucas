@@ -9,6 +9,7 @@ import com.project.professorallocation.entity.Department;
 import com.project.professorallocation.repository.DepartmentRepository;
 
 import lombok.RequiredArgsConstructor;
+import validations.DepartmentValidator;
 
 @Service
 @RequiredArgsConstructor
@@ -17,15 +18,22 @@ public class DepartmentService {
 	public final DepartmentRepository departmentRepository;
 	
 	//---------------CREATE---------------
-	public Department create(Department department) {
+	public Department create(Department department) throws Exception {
+		
 		department.setId(null);
-		return departmentRepository.save(department);
+		DepartmentValidator.validateName(department);
+		
+		return saveInternal(department);
 	}
 	//------------------------------------
 
 	//---------------UPDATE---------------
-	public Department update(Department department) {
-		return departmentRepository.save(department);
+	public Department update(Department department) throws Exception {
+		
+		DepartmentValidator.checkDepartmentExistById(department, departmentRepository.existsById(department.getId()));
+		DepartmentValidator.validateName(department);
+		
+		return saveInternal(department);
 	}
 	//------------------------------------
 
@@ -35,20 +43,30 @@ public class DepartmentService {
 		return departmentRepository.findAll();
 	}
 
-	public Department findById(Long id) {
+	public Department findById(Long id) throws Exception {
+		
 		Optional<Department> department = departmentRepository.findById(id);
+		DepartmentValidator.checkDepartmentExist(department);
+		
 		return department.orElse(null);
 	}
 	//------------------------------------
 
 	//----------------DELETE----------------
-	public void deleteById(Long id) {
+	public void deleteById(Long id) throws Exception {
+		
+		Optional<Department> department = departmentRepository.findById(id);
+		DepartmentValidator.checkDepartmentExist(department);
+		
 		departmentRepository.deleteById(id);
 	}
 
 	public void deleteALL() {
-		departmentRepository.deleteAll();
+		departmentRepository.deleteAllInBatch();
 	}
 	//--------------------------------------
 
+	private Department saveInternal(Department department) {
+        return departmentRepository.save(department);
+    }
 }

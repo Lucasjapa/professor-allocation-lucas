@@ -1,10 +1,10 @@
-package util;
+package validations;
 
 import java.util.Optional;
 
 import com.project.professorallocation.entity.Course;
 
-public class CourseValidators {
+public class CourseValidator {
 
 	public static void validateName(Course course) throws Exception {
 		
