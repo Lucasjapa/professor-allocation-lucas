@@ -20,7 +20,7 @@ public class DepartmentServiceTest {
 	public void create() throws Exception {
 		try {
 		Department department = new Department();
-		department.setName("teste");
+		department.setName("correr");
 		departmentService.create(department);
 		
 		// Print

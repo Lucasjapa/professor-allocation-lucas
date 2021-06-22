@@ -18,27 +18,93 @@ public class ProfessorServiceTest {
 	private ProfessorService professorService;
 	
 	@Test
-	public void findAll() {
-		// Act
-		List<Professor> professors = professorService.findAll();
-		
-		// Print
-		System.out.println(professors);
+	public void create() {
+		try {
+			Department department = new Department();
+			department.setId(6L);
+			
+			Professor professor = new Professor();
+			professor.setName("bina");
+			professor.setCpf("10023233322");
+			professor.setDepartment(department);
+			
+			professorService.create(professor);
+			
+			// Print
+			System.out.println(professor);
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	@Test
-	public void create() {
-		Department dep = new Department();
-		dep.setId(3L);
-		Professor prof = new Professor();
-		prof.setName("Amirton 1");
-		prof.setCpf("11122233325");
-		prof.setDepartment(dep);
-		
-		professorService.create(prof);
+	public void update() throws Exception {
+		try {
+			//Arrange
+			Department department = new Department();
+			department.setId(5L);
+			
+			Professor professor = professorService.findById(16L);
+			professor.setName("haha");
+			professor.setCpf("11023233322");
+			professor.setDepartment(department);
+
+			// Act
+			professorService.update(professor);
+
+			// Print
+			System.out.println(professor);
+
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void readyById() throws Exception {
+		try {
+		Professor professor = new Professor();
+		professor = professorService.findById(13L);
 		
 		// Print
-		System.out.println(prof);
+		System.out.println(professor);
+		
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void readyAll(){
+		
+		List<Professor> professor = professorService.findAll();
+		
+		// Print
+		System.out.println(professor);
+		
+	}
+	
+	@Test
+	public void deletedById(){
+		try {
+			professorService.deleteById(11L);
+
+			// Print
+			System.out.println("Deletado com sucesso");
+
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}	
+	}
+	
+	@Test
+	public void deletedALL(){
+		
+		professorService.deleteALL();
 	}
 
 }

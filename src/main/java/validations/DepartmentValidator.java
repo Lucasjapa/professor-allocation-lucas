@@ -17,14 +17,14 @@ public class DepartmentValidator {
 	public static void checkDepartmentExist(Optional<Department> department) throws Exception {
 
 		if(department.isEmpty()) {
-			throw new Exception("No departments were found.");
+			throw new Exception("Department does not exist");
 		}
 	}
 	
 	public static void checkDepartmentExistById(Department department, Boolean exist) throws Exception {
 
 		if(department.getId() == null || !exist) {
-			throw new Exception("Department not found.");
+			throw new Exception("Department does not exist");
 		}
 	}
 	
