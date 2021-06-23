@@ -76,6 +76,16 @@ public class CourseServiceTest {
 	}
 	
 	@Test
+	public void readyCourseByName(){
+		
+		List<Course> courses = courseService.findCourseByName("O");
+		
+		// Print
+		System.out.println(courses);
+		
+	}
+	
+	@Test
 	public void deletedById(){
 		
 		try {

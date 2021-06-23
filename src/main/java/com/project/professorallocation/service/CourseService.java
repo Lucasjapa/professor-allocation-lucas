@@ -50,6 +50,12 @@ public class CourseService {
 		
 		return course.orElse(null);
 	}
+	
+	public List<Course> findCourseByName(String name){
+		
+		List<Course> courses = courseRepository.findByNameContainingIgnoreCase(name);
+		return courses;
+	}
 	//------------------------------------
 	
 	//----------------DELETE----------------
