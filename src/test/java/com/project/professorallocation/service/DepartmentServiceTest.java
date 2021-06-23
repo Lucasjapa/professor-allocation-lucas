@@ -76,6 +76,16 @@ public class DepartmentServiceTest {
 	}
 	
 	@Test
+	public void readyDepartmentByName(){
+		
+		List<Department> departments = departmentService.findDepartmentByName("e");
+		
+		// Print
+		System.out.println(departments);
+		
+	}
+	
+	@Test
 	public void deletedById(){
 		
 		try {

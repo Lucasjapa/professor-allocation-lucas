@@ -50,6 +50,12 @@ public class DepartmentService {
 		
 		return department.orElse(null);
 	}
+	
+	public List<Department> findDepartmentByName(String name){
+
+		List<Department> departments = departmentRepository.findByNameContainingIgnoreCase(name);
+		return departments;
+	}
 	//------------------------------------
 
 	//----------------DELETE----------------

@@ -11,5 +11,5 @@ import com.project.professorallocation.entity.Department;
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
 	//Buscar departamentos por uma parte do nome;
-	List<Department> findByNameContainingIgnoreCase(String partName);
+	List<Department> findByNameContainingIgnoreCase(String name);
 }
