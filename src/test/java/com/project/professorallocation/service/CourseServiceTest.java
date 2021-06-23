@@ -20,7 +20,7 @@ public class CourseServiceTest {
 	public void create() throws Exception {
 		try {
 		Course course = new Course();
-		course.setName("bina");
+		course.setName("voar");
 		courseService.create(course);
 		
 		// Print

@@ -26,7 +26,6 @@ public class ProfessorValidator {
 		if(professor.isEmpty()) {
 			throw new Exception("Professor does not exist");
 		}
-		
 	}
 	
 	public static void checkProfessorExistById(Professor professor, Boolean exist) throws Exception {

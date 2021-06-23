@@ -17,15 +17,17 @@ public class ProfessorServiceTest {
 	@Autowired
 	private ProfessorService professorService;
 	
+	@Autowired
+	private DepartmentService departmentService;
+	
 	@Test
 	public void create() {
 		try {
-			Department department = new Department();
-			department.setId(6L);
+			Department department= departmentService.findById(5L);
 			
 			Professor professor = new Professor();
-			professor.setName("bina");
-			professor.setCpf("10023233322");
+			professor.setName("naruto aa");
+			professor.setCpf("31023233322");
 			professor.setDepartment(department);
 			
 			professorService.create(professor);
@@ -42,10 +44,9 @@ public class ProfessorServiceTest {
 	public void update() throws Exception {
 		try {
 			//Arrange
-			Department department = new Department();
-			department.setId(5L);
+			Department department= departmentService.findById(6L);
 			
-			Professor professor = professorService.findById(16L);
+			Professor professor = professorService.findById(21L);
 			professor.setName("haha");
 			professor.setCpf("11023233322");
 			professor.setDepartment(department);
