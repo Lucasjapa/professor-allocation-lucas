@@ -11,5 +11,5 @@ import com.project.professorallocation.entity.Professor;
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
 	//Buscar professors por uma parte do nome;
-	List<Professor> findByNameContainingIgnoreCase(String partName);
+	List<Professor> findByNameContainingIgnoreCase(String name);
 }

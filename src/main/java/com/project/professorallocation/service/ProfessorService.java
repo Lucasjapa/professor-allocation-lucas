@@ -51,6 +51,12 @@ public class ProfessorService {
 		
 		return professor.orElse(null);
 	}
+	
+	public List<Professor> findProfessorByName(String name){
+
+		List<Professor> professors = professorRepository.findByNameContainingIgnoreCase(name);
+		return professors;
+	}
 	//------------------------------------
 	
 	//----------------DELETE----------------

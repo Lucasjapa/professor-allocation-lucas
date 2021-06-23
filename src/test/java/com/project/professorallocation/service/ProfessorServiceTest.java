@@ -85,7 +85,15 @@ public class ProfessorServiceTest {
 		
 		// Print
 		System.out.println(professor);
+	}
+	
+	@Test
+	public void readyProfessorByName(){
 		
+		List<Professor> professors = professorService.findProfessorByName("O");
+		
+		// Print
+		System.out.println(professors);
 	}
 	
 	@Test

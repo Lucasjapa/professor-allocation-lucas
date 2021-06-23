@@ -82,7 +82,6 @@ public class DepartmentServiceTest {
 		
 		// Print
 		System.out.println(departments);
-		
 	}
 	
 	@Test
