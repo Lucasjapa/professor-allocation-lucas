@@ -16,6 +16,8 @@ public class DepartmentValidator {
 	
 	public static void checkDepartmentExist(Optional<Department> department) throws Exception {
 
+		// Na minha máquina, o método isEmpty não existe. Na minha máquina, o correto seria:
+		// if(!department.isPresent()) {
 		if(department.isEmpty()) {
 			throw new Exception("Department does not exist");
 		}

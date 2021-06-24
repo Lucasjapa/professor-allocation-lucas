@@ -22,7 +22,8 @@ public class ProfessorValidator {
 	}
 	
 	public static void checkProfessorExist(Optional<Professor> professor) throws Exception {
-
+		// Na minha máquina, o método isEmpty não existe. Na minha máquina, o correto seria:
+		// if(!professor.isPresent()) {
 		if(professor.isEmpty()) {
 			throw new Exception("Professor does not exist");
 		}

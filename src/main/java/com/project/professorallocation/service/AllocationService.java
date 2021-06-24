@@ -22,6 +22,9 @@ public class AllocationService {
 	private final AllocationRepository allocationRepository;
 	private final ProfessorRepository professorRepository;
 	private final CourseRepository courseRepository;
+	
+	// Usar o serviço é mais interessante pois o findById feito para a camada
+	// de serviço já traria a entidade aplicando alguma regra de negócio (se fosse o caso)
 	private final ProfessorService professorService;
 	private final CourseService courseService;
 	
@@ -49,22 +52,26 @@ public class AllocationService {
 	public Allocation findById(Long allocationId) throws Exception {
 
 		Optional<Allocation> allocation = allocationRepository.findById(allocationId);
+		
+		// Dica: A checagem que você fez aqui você poderia usar:
+		//allocation.orElseThrow(() -> ew Exception("Allocation does not exist"));
+		// E substituir as duas linhas
 		AllocationValidator.checkAllocationExist(allocation);
 
 		return allocation.orElse(null);
 	}
 	
 	public List<Allocation> findAllocationByProfessorId(Long professorId) throws Exception {
-		
-		professorService.findById(professorId);
+		// Linha sem necessidade
+		//professorService.findById(professorId);
 		List<Allocation> allocations = allocationRepository.findByProfessorId(professorId);
 		
 		return allocations;
 	}
 	
 	public List<Allocation> findAllocationByCourseId(Long courseId) throws Exception {
-		
-		courseService.findById(courseId);
+		// Linha sem necessidade
+		//courseService.findById(courseId);
 		List<Allocation> allocations = allocationRepository.findByCourseId(courseId);
 		
 		return allocations;
@@ -74,6 +81,8 @@ public class AllocationService {
 	//----------------DELETE----------------
 	public void deleteById(Long id) throws Exception {
 
+		// O melhor é usar: allocationRepository.existsById(id);
+		// Mas não está errado
 		Optional<Allocation> allocation = allocationRepository.findById(id);
 		AllocationValidator.checkAllocationExist(allocation);
 

@@ -26,6 +26,8 @@ public class AllocationValidator {
 	
 	public static void checkAllocationExist(Optional<Allocation> allocation) throws Exception {
 
+		// Na minha máquina, o método isEmpty não existe. Na minha máquina, o correto seria:
+		// if(!allocation.isPresent()) {
 		if(allocation.isEmpty()) {
 			throw new Exception("Allocation does not exist");
 		}

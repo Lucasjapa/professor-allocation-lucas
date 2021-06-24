@@ -96,6 +96,7 @@ public class AllocationServiceTest {
 	}
 	
 	@Test
+	// A grafia correta é readAll
 	public void readyAll(){
 		
 		List<Allocation> allocations = allocationService.findAll();

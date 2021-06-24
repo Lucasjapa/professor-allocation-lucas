@@ -15,6 +15,8 @@ public class CourseValidator {
 	
 	public static void checkCourseExist(Optional<Course> course) throws Exception {
 		
+		// Na minha máquina, o método isEmpty não existe. Na minha máquina, o correto seria:
+		// if(!course.isPresent()) {
 		if(course.isEmpty()) {
 			throw new Exception("No courses were found.");
 		}
