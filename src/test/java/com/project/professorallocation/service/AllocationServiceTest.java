@@ -81,7 +81,7 @@ public class AllocationServiceTest {
 	}
 	
 	@Test
-	public void readyById() throws Exception {
+	public void readById() throws Exception {
 		try {
 		Allocation allocation = new Allocation();
 		allocation = allocationService.findById(3L);
@@ -96,7 +96,7 @@ public class AllocationServiceTest {
 	}
 	
 	@Test
-	public void readyAll(){
+	public void readAll(){
 		
 		List<Allocation> allocations = allocationService.findAll();
 		
@@ -105,7 +105,7 @@ public class AllocationServiceTest {
 	}
 	
 	@Test
-	public void readyByProfessorId() throws Exception {
+	public void readByProfessorId() throws Exception {
 		try {
 			List<Allocation> allocations = allocationService.findAllocationByProfessorId(16L);
 		
@@ -119,7 +119,7 @@ public class AllocationServiceTest {
 	}
 	
 	@Test
-	public void readyByCourseId() throws Exception {
+	public void readByCourseId() throws Exception {
 		try {
 			List<Allocation> allocations = allocationService.findAllocationByCourseId(1L);
 		

@@ -1,8 +1,5 @@
 package validations;
 
-
-import java.util.Optional;
-
 import com.project.professorallocation.entity.Department;
 
 public class DepartmentValidator {
@@ -11,13 +8,6 @@ public class DepartmentValidator {
 
 		if(department.getName() == null || department.getName().equals("")) {
 			throw new Exception("The department entered is not valid.");
-		}
-	}
-	
-	public static void checkDepartmentExist(Optional<Department> department) throws Exception {
-
-		if(department.isEmpty()) {
-			throw new Exception("Department does not exist");
 		}
 	}
 	

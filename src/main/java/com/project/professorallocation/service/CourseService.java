@@ -1,7 +1,6 @@
 package com.project.professorallocation.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -37,18 +36,14 @@ public class CourseService {
 	}
 	//------------------------------------
 
-
 	//----------------READ----------------
 	public List<Course> findAll(){
 		return courseRepository.findAll();
 	}
 
-	public Course findById(Long id) throws Exception {
+	public Course findById(Long courseId) throws Exception {
 		
-		Optional<Course> course = courseRepository.findById(id);
-		CourseValidator.checkCourseExist(course);
-		
-		return course.orElse(null);
+		return courseRepository.findById(courseId).orElseThrow(() -> new Exception("Course does not exist"));
 	}
 	
 	public List<Course> findCourseByName(String name){
@@ -56,15 +51,13 @@ public class CourseService {
 		List<Course> courses = courseRepository.findByNameContainingIgnoreCase(name);
 		return courses;
 	}
-	//------------------------------------
+	//--------------------------------------
 	
 	//----------------DELETE----------------
-	public void deleteById(Long id) throws Exception {
+	public void deleteById(Long courseId) throws Exception {
 		
-		Optional<Course> course = courseRepository.findById(id);
-		CourseValidator.checkCourseExist(course);
-		
-		courseRepository.deleteById(id);
+		courseRepository.findById(courseId).orElseThrow(() -> new Exception("Course does not exist"));
+		courseRepository.deleteById(courseId);
 	}
 
 	public void deleteALL() {

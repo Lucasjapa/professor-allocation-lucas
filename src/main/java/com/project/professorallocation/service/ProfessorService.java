@@ -1,13 +1,10 @@
 package com.project.professorallocation.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.project.professorallocation.entity.Department;
 import com.project.professorallocation.entity.Professor;
-import com.project.professorallocation.repository.DepartmentRepository;
 import com.project.professorallocation.repository.ProfessorRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +15,7 @@ import validations.ProfessorValidator;
 public class ProfessorService {
 
 	private final ProfessorRepository professorRepository;
-	private final DepartmentRepository departmentRepository;
+	private final DepartmentService departmentService;
 	
 	
 	//---------------CREATE---------------
@@ -46,10 +43,7 @@ public class ProfessorService {
 	
 	public Professor findById(Long professorId) throws Exception {
 		
-		Optional<Professor> professor = professorRepository.findById(professorId);
-		ProfessorValidator.checkProfessorExist(professor);
-		
-		return professor.orElse(null);
+		return professorRepository.findById(professorId).orElseThrow(() -> new Exception("Professor does not exist"));
 	}
 	
 	public List<Professor> findProfessorByName(String name){
@@ -62,9 +56,7 @@ public class ProfessorService {
 	//----------------DELETE----------------
 	public void deleteById(Long professorId) throws Exception {
 		
-		Optional<Professor> professor = professorRepository.findById(professorId);
-		ProfessorValidator.checkProfessorExist(professor);
-		
+		professorRepository.findById(professorId).orElseThrow(() -> new Exception("Professor does not exist"));		
 		professorRepository.deleteById(professorId);
 	}
 	
@@ -73,17 +65,17 @@ public class ProfessorService {
 	}
 	//--------------------------------------
 	
-	private Professor saveInternal(Professor professor) {
+	private Professor saveInternal(Professor professor) throws Exception {
 		professor = professorRepository.save(professor);
-		professor.setDepartment(departmentRepository.findById(professor.getDepartment().getId()).orElse(null));
+		professor.setDepartment(departmentService.findById(professor.getDepartment().getId()));
 		
 		return professor;
 	}
 	
 	private Professor validation(Professor professor) throws Exception {
 		
-		Optional<Department> department = departmentRepository.findById(professor.getDepartment().getId());
-		ProfessorValidator.validateProfessor(professor,department);
+		departmentService.findById(professor.getDepartment().getId());
+		ProfessorValidator.validateProfessor(professor);
 		
 		return professor;
 	}

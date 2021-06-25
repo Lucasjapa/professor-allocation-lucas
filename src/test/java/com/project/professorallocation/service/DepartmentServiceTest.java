@@ -50,7 +50,7 @@ public class DepartmentServiceTest {
 	}
 	
 	@Test
-	public void readyById() throws Exception {
+	public void readById() throws Exception {
 		try {
 		Department department = new Department();
 		
@@ -66,7 +66,7 @@ public class DepartmentServiceTest {
 	}
 	
 	@Test
-	public void readyAll(){
+	public void readAll(){
 		
 		List<Department> department = departmentService.findAll();
 		
@@ -76,7 +76,7 @@ public class DepartmentServiceTest {
 	}
 	
 	@Test
-	public void readyDepartmentByName(){
+	public void readDepartmentByName(){
 		
 		List<Department> departments = departmentService.findDepartmentByName("e");
 		

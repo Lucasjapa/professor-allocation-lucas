@@ -64,7 +64,7 @@ public class ProfessorServiceTest {
 	}
 	
 	@Test
-	public void readyById() throws Exception {
+	public void readById() throws Exception {
 		try {
 		Professor professor = new Professor();
 		professor = professorService.findById(13L);
@@ -79,7 +79,7 @@ public class ProfessorServiceTest {
 	}
 	
 	@Test
-	public void readyAll(){
+	public void readAll(){
 		
 		List<Professor> professor = professorService.findAll();
 		
@@ -88,7 +88,7 @@ public class ProfessorServiceTest {
 	}
 	
 	@Test
-	public void readyProfessorByName(){
+	public void readProfessorByName(){
 		
 		List<Professor> professors = professorService.findProfessorByName("O");
 		

@@ -1,7 +1,6 @@
 package validations;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.project.professorallocation.entity.Allocation;
 import com.project.professorallocation.entity.Course;
@@ -9,11 +8,8 @@ import com.project.professorallocation.entity.Professor;
 
 public class AllocationValidator {
 
-	public static void validateAllocation(Allocation newAllocation, Optional<Professor> professor, Optional<Course> course, List<Allocation> allocations) throws Exception {
+	public static void validateAllocation(Allocation newAllocation, Professor professor, Course course, List<Allocation> allocations) throws Exception {
 
-		ProfessorValidator.checkProfessorExist(professor);
-		CourseValidator.checkCourseExist(course);
-		
 		for(Allocation allocation: allocations) {
 			if(!allocation.getId().equals(newAllocation.getId())
 					&& allocation.getDayOfWeek().equals(newAllocation.getDayOfWeek())
@@ -21,13 +17,6 @@ public class AllocationValidator {
 					&& newAllocation.getStart().compareTo(allocation.getEnd()) < 0) {
 				throw new Exception("Shock data, allocation cannot be recorded.");
 			}
-		}
-	}
-	
-	public static void checkAllocationExist(Optional<Allocation> allocation) throws Exception {
-
-		if(allocation.isEmpty()) {
-			throw new Exception("Allocation does not exist");
 		}
 	}
 	

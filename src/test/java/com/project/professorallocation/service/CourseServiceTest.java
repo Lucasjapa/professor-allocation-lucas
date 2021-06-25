@@ -50,7 +50,7 @@ public class CourseServiceTest {
 	}
 	
 	@Test
-	public void readyById() throws Exception {
+	public void readById() throws Exception {
 		try {
 		Course course = new Course();
 		
@@ -66,7 +66,7 @@ public class CourseServiceTest {
 	}
 	
 	@Test
-	public void readyAll(){
+	public void readAll(){
 		
 		List<Course> course = courseService.findAll();
 		
@@ -76,7 +76,7 @@ public class CourseServiceTest {
 	}
 	
 	@Test
-	public void readyCourseByName(){
+	public void readCourseByName(){
 		
 		List<Course> courses = courseService.findCourseByName("O");
 		

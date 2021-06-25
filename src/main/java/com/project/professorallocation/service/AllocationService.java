@@ -1,7 +1,6 @@
 package com.project.professorallocation.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -9,8 +8,6 @@ import com.project.professorallocation.entity.Allocation;
 import com.project.professorallocation.entity.Course;
 import com.project.professorallocation.entity.Professor;
 import com.project.professorallocation.repository.AllocationRepository;
-import com.project.professorallocation.repository.CourseRepository;
-import com.project.professorallocation.repository.ProfessorRepository;
 
 import lombok.RequiredArgsConstructor;
 import validations.AllocationValidator;
@@ -20,8 +17,6 @@ import validations.AllocationValidator;
 public class AllocationService {
 	
 	private final AllocationRepository allocationRepository;
-	private final ProfessorRepository professorRepository;
-	private final CourseRepository courseRepository;
 	private final ProfessorService professorService;
 	private final CourseService courseService;
 	
@@ -48,15 +43,12 @@ public class AllocationService {
 
 	public Allocation findById(Long allocationId) throws Exception {
 
-		Optional<Allocation> allocation = allocationRepository.findById(allocationId);
-		AllocationValidator.checkAllocationExist(allocation);
+		return allocationRepository.findById(allocationId).orElseThrow(() -> new Exception("Allocation does not exist"));
 
-		return allocation.orElse(null);
 	}
 	
 	public List<Allocation> findAllocationByProfessorId(Long professorId) throws Exception {
 		
-		professorService.findById(professorId);
 		List<Allocation> allocations = allocationRepository.findByProfessorId(professorId);
 		
 		return allocations;
@@ -64,7 +56,6 @@ public class AllocationService {
 	
 	public List<Allocation> findAllocationByCourseId(Long courseId) throws Exception {
 		
-		courseService.findById(courseId);
 		List<Allocation> allocations = allocationRepository.findByCourseId(courseId);
 		
 		return allocations;
@@ -72,12 +63,10 @@ public class AllocationService {
 	//------------------------------------
 	
 	//----------------DELETE----------------
-	public void deleteById(Long id) throws Exception {
+	public void deleteById(Long allocationId) throws Exception {
 
-		Optional<Allocation> allocation = allocationRepository.findById(id);
-		AllocationValidator.checkAllocationExist(allocation);
-
-		allocationRepository.deleteById(id);
+		allocationRepository.findById(allocationId).orElseThrow(() -> new Exception("Allocation does not exist"));
+		allocationRepository.deleteById(allocationId);
 	}
 
 	public void deleteALL() {
@@ -85,17 +74,17 @@ public class AllocationService {
 	}
 	//--------------------------------------
 	
-	private Allocation saveInternal(Allocation allocation) {
+	private Allocation saveInternal(Allocation allocation) throws Exception {
 		allocation = allocationRepository.save(allocation);
-		allocation.setProfessor(professorRepository.findById(allocation.getProfessor().getId()).orElse(null));
-		allocation.setCourse(courseRepository.findById(allocation.getCourse().getId()).orElse(null));
+		allocation.setProfessor(professorService.findById(allocation.getProfessor().getId()));
+		allocation.setCourse(courseService.findById(allocation.getCourse().getId()));
 		
 		return allocation;
 	}
 	
 	private Allocation validation(Allocation newAllocation) throws Exception {
-		Optional<Professor> professor = professorRepository.findById(newAllocation.getProfessor().getId());
-		Optional<Course> course = courseRepository.findById(newAllocation.getCourse().getId());
+		Professor professor = professorService.findById(newAllocation.getProfessor().getId());
+		Course course = courseService.findById(newAllocation.getCourse().getId());
 		List<Allocation> allocations = allocationRepository.findByProfessorId(newAllocation.getProfessor().getId());
 		
 		AllocationValidator.validateAllocation(newAllocation, professor, course, allocations);

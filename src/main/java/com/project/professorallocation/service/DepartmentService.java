@@ -1,7 +1,6 @@
 package com.project.professorallocation.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -43,12 +42,9 @@ public class DepartmentService {
 		return departmentRepository.findAll();
 	}
 
-	public Department findById(Long id) throws Exception {
+	public Department findById(Long departmentId) throws Exception {
 		
-		Optional<Department> department = departmentRepository.findById(id);
-		DepartmentValidator.checkDepartmentExist(department);
-		
-		return department.orElse(null);
+		return departmentRepository.findById(departmentId).orElseThrow(() -> new Exception("Department does not exist"));
 	}
 	
 	public List<Department> findDepartmentByName(String name){
@@ -59,12 +55,10 @@ public class DepartmentService {
 	//------------------------------------
 
 	//----------------DELETE----------------
-	public void deleteById(Long id) throws Exception {
+	public void deleteById(Long departmentId) throws Exception {
 		
-		Optional<Department> department = departmentRepository.findById(id);
-		DepartmentValidator.checkDepartmentExist(department);
-		
-		departmentRepository.deleteById(id);
+		departmentRepository.findById(departmentId).orElseThrow(() -> new Exception("Department does not exist"));
+		departmentRepository.deleteById(departmentId);
 	}
 
 	public void deleteALL() {
