@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 @Entity
@@ -29,20 +31,24 @@ public class Allocation {
 	private Long id;
 	
 	@Enumerated(value = EnumType.STRING)
-	@Column(nullable = false, unique = false)
+	@Column(nullable = false)
 	private DayOfWeek dayOfWeek;
-	
+
+	@JsonFormat(pattern = "HH:mmZ")
 	@Temporal(value = TemporalType.TIME)
-	@Column(nullable = false, unique = false)
+	@Column(nullable = false)
 	private Date start;
-	
+
+	@JsonFormat(pattern = "HH:mmZ")
 	@Temporal(value = TemporalType.TIME)
-	@Column(nullable = false, unique = false)
+	@Column(nullable = false)
 	private Date end;
-	
+
+	@JsonIgnoreProperties({"allocations"})
 	@ManyToOne(optional = false)
 	private Professor professor;
-	
+
+	@JsonIgnoreProperties({"allocations"})
 	@ManyToOne(optional = false)
 	private Course course;
 

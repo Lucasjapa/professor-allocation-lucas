@@ -1,4 +1,4 @@
-package validations;
+package com.project.professorallocation.validations;
 
 import com.project.professorallocation.entity.Professor;
 import com.project.professorallocation.repository.ProfessorRepository;

@@ -81,19 +81,10 @@ public class ProfessorServiceTest {
 	@Test
 	public void readAll(){
 		
-		List<Professor> professor = professorService.findAll();
+		List<Professor> professor = professorService.findAll("teste");
 		
 		// Print
 		System.out.println(professor);
-	}
-	
-	@Test
-	public void readProfessorByName(){
-		
-		List<Professor> professors = professorService.findProfessorByName("O");
-		
-		// Print
-		System.out.println(professors);
 	}
 	
 	@Test

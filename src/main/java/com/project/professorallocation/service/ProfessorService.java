@@ -8,7 +8,7 @@ import com.project.professorallocation.entity.Professor;
 import com.project.professorallocation.repository.ProfessorRepository;
 
 import lombok.RequiredArgsConstructor;
-import validations.ProfessorValidator;
+import com.project.professorallocation.validations.ProfessorValidator;
 
 @Service
 @RequiredArgsConstructor
@@ -37,19 +37,17 @@ public class ProfessorService {
 	
 	
 	//----------------READ----------------
-	public List<Professor> findAll(){
-		return professorRepository.findAll();
+	public List<Professor> findAll(String name){
+		if (name == null){
+			return professorRepository.findAll();
+		}else{
+			return professorRepository.findByNameContainingIgnoreCase(name);
+		}
 	}
 	
 	public Professor findById(Long professorId) throws Exception {
 		
 		return professorRepository.findById(professorId).orElseThrow(() -> new Exception("Professor does not exist"));
-	}
-	
-	public List<Professor> findProfessorByName(String name){
-
-		List<Professor> professors = professorRepository.findByNameContainingIgnoreCase(name);
-		return professors;
 	}
 	//------------------------------------
 	

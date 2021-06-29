@@ -1,4 +1,4 @@
-package validations;
+package com.project.professorallocation.validations;
 
 import java.util.List;
 

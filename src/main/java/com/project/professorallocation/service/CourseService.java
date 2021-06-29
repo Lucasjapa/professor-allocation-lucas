@@ -8,7 +8,7 @@ import com.project.professorallocation.entity.Course;
 import com.project.professorallocation.repository.CourseRepository;
 
 import lombok.RequiredArgsConstructor;
-import validations.CourseValidator;
+import com.project.professorallocation.validations.CourseValidator;
 
 @Service
 @RequiredArgsConstructor

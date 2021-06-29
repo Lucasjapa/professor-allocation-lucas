@@ -10,7 +10,7 @@ import com.project.professorallocation.entity.Professor;
 import com.project.professorallocation.repository.AllocationRepository;
 
 import lombok.RequiredArgsConstructor;
-import validations.AllocationValidator;
+import com.project.professorallocation.validations.AllocationValidator;
 
 @Service
 @RequiredArgsConstructor
