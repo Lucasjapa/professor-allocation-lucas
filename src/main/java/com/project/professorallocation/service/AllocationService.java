@@ -44,21 +44,14 @@ public class AllocationService {
 	public Allocation findById(Long allocationId) throws Exception {
 
 		return allocationRepository.findById(allocationId).orElseThrow(() -> new Exception("Allocation does not exist"));
-
 	}
 	
-	public List<Allocation> findAllocationByProfessorId(Long professorId) throws Exception {
-		
-		List<Allocation> allocations = allocationRepository.findByProfessorId(professorId);
-		
-		return allocations;
+	public List<Allocation> findAllocationByProfessorId(Long professorId) {
+		return allocationRepository.findByProfessorId(professorId);
 	}
 	
-	public List<Allocation> findAllocationByCourseId(Long courseId) throws Exception {
-		
-		List<Allocation> allocations = allocationRepository.findByCourseId(courseId);
-		
-		return allocations;
+	public List<Allocation> findAllocationByCourseId(Long courseId) {
+		return allocationRepository.findByCourseId(courseId);
 	}
 	//------------------------------------
 	
@@ -87,7 +80,7 @@ public class AllocationService {
 		Course course = courseService.findById(newAllocation.getCourse().getId());
 		List<Allocation> allocations = allocationRepository.findByProfessorId(newAllocation.getProfessor().getId());
 		
-		AllocationValidator.validateAllocation(newAllocation, professor, course, allocations);
+		AllocationValidator.validateAllocation(newAllocation, allocations);
 			
 		return newAllocation;
 	}

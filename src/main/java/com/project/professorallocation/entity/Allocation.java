@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 @Entity
@@ -34,11 +35,13 @@ public class Allocation {
 	@Column(nullable = false)
 	private DayOfWeek dayOfWeek;
 
+	@ApiModelProperty(example = "HH:mmZ")
 	@JsonFormat(pattern = "HH:mmZ")
 	@Temporal(value = TemporalType.TIME)
 	@Column(nullable = false)
 	private Date start;
 
+	@ApiModelProperty(example = "HH:mmZ")
 	@JsonFormat(pattern = "HH:mmZ")
 	@Temporal(value = TemporalType.TIME)
 	@Column(nullable = false)
