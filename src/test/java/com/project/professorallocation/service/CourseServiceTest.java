@@ -68,20 +68,10 @@ public class CourseServiceTest {
 	@Test
 	public void readAll(){
 		
-		List<Course> course = courseService.findAll();
+		List<Course> course = courseService.findAll("tt");
 		
 		// Print
 		System.out.println(course);
-		
-	}
-	
-	@Test
-	public void readCourseByName(){
-		
-		List<Course> courses = courseService.findCourseByName("O");
-		
-		// Print
-		System.out.println(courses);
 		
 	}
 	

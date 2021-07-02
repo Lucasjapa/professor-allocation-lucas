@@ -37,22 +37,20 @@ public class CourseService {
 	//------------------------------------
 
 	//----------------READ----------------
-	public List<Course> findAll(){
-		return courseRepository.findAll();
+	public List<Course> findAll(String name){
+		if (name == null){
+			return courseRepository.findAll();
+		}else{
+			return courseRepository.findByNameContainingIgnoreCase(name);
+		}
 	}
 
 	public Course findById(Long courseId) throws Exception {
-		
+
 		return courseRepository.findById(courseId).orElseThrow(() -> new Exception("Course does not exist"));
 	}
-	
-	public List<Course> findCourseByName(String name){
-		
-		List<Course> courses = courseRepository.findByNameContainingIgnoreCase(name);
-		return courses;
-	}
 	//--------------------------------------
-	
+
 	//----------------DELETE----------------
 	public void deleteById(Long courseId) throws Exception {
 		

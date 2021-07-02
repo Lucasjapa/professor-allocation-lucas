@@ -1,7 +1,7 @@
 package com.project.professorallocation.controller;
 
-import com.project.professorallocation.entity.Professor;
-import com.project.professorallocation.service.ProfessorService;
+import com.project.professorallocation.entity.Course;
+import com.project.professorallocation.service.CourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,61 +14,61 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(tags = {"professors"})
+@Api(tags = {"courses"})
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(
-        path = "/professors",
+        path = "/courses",
         produces = MediaType.APPLICATION_JSON_VALUE
 )
-public class ProfessorController {
+public class CourseController {
 
-    private final ProfessorService professorService;
+    private final CourseService courseService;
 
     //--------------------------------READ--------------------------------
     // @GetMapping(path = "/") caminho default
-    @ApiOperation(value = "Find all Professors")
+    @ApiOperation(value = "Find all Courses")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 404, message = "Not Found")
     })
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public ResponseEntity<List<Professor>> findAll(
+    public ResponseEntity<List<Course>> findAll(
             @RequestParam(name = "name", required = false) String name){
-            return new ResponseEntity<>(professorService.findAll(name), HttpStatus.OK);
+        return new ResponseEntity<>(courseService.findAll(name), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Find a professor by Id")
+    @ApiOperation(value = "Find a course by Id")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 404, message = "Not Found")
     })
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/{professor_id}")
-    public ResponseEntity<Professor> findById(
-            @PathVariable(name = "professor_id") Long id)  {
-       try{
-           return new ResponseEntity<>(professorService.findById(id), HttpStatus.OK);
-       }catch (Exception e){
-           System.out.println(e.getMessage());
-           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-       }
+    @GetMapping(path = "/{course_id}")
+    public ResponseEntity<Course> findById(
+            @PathVariable(name = "course_id") Long id)  {
+        try{
+            return new ResponseEntity<>(courseService.findById(id), HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     //------------------------------------------------------------------------------
 
     //--------------------------------CREATE--------------------------------
     // @PostMapping(path = "/") caminho default
-    @ApiOperation(value = "Create a professor")
+    @ApiOperation(value = "Create a course")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Created"),
             @ApiResponse(code = 400, message = "Bad Request")
     })
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<Professor> create(@RequestBody Professor professor)  {
+    public ResponseEntity<Course> create(@RequestBody Course course) {
         try{
-            return new ResponseEntity<>(professorService.create(professor), HttpStatus.CREATED);
+            return new ResponseEntity<>(courseService.create(course), HttpStatus.CREATED);
         }catch(Exception e){
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -78,26 +78,26 @@ public class ProfessorController {
 
     //--------------------------------UPDATE--------------------------------
     // @PutMapping(path = "/") caminho default
-    @ApiOperation(value = "Update a professor")
+    @ApiOperation(value = "Update a course")
     @ApiResponses({
             @ApiResponse(code = 200, message = "0K"),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found")
     })
     @PutMapping(
-            path = "/{professor_id}",
+            path = "/{course_id}",
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Professor> update(
-            @PathVariable(name = "professor_id") Long id,
-            @RequestBody Professor professor) {
-        professor.setId(id);
+    public ResponseEntity<Course> update(
+            @PathVariable(name = "course_id") Long id,
+            @RequestBody Course course) {
+        course.setId(id);
         try{
-            if(professorService.update(professor) == null){
+            if(courseService.update(course) == null){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }else{
-                return new ResponseEntity<>(professorService.update(professor), HttpStatus.OK);
+                return new ResponseEntity<>(courseService.update(course), HttpStatus.OK);
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -108,16 +108,16 @@ public class ProfessorController {
 
     //--------------------------------DELETE--------------------------------
     //@DeleteMapping (path = "/") caminho default
-    @ApiOperation(value = "Delete a professor by Id")
+    @ApiOperation(value = "Delete a course by Id")
     @ApiResponses({
             @ApiResponse(code = 204, message = "No Content"),
             @ApiResponse(code = 404, message = "Not Found")
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(path = "/{professor_id}")
-    public ResponseEntity<Void> deleteById(@PathVariable(name = "professor_id") Long id)  {
+    @DeleteMapping(path = "/{course_id}")
+    public ResponseEntity<Void> deleteById(@PathVariable(name = "course_id") Long id)  {
         try{
-            professorService.deleteById(id);
+            courseService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -126,14 +126,14 @@ public class ProfessorController {
     }
 
     //@DeleteMapping (path = "/") caminho default
-    @ApiOperation(value = "Delete All Professors")
+    @ApiOperation(value = "Delete All Courses")
     @ApiResponses({
             @ApiResponse(code = 204, message = "No Content")
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping
     public ResponseEntity<Void> deleteAll(){
-        professorService.deleteALL();
+        courseService.deleteALL();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     //----------------------------------------------------------------------------------
