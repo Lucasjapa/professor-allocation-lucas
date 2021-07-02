@@ -68,20 +68,11 @@ public class DepartmentServiceTest {
 	@Test
 	public void readAll(){
 		
-		List<Department> department = departmentService.findAll();
+		List<Department> department = departmentService.findAll("teste");
 		
 		// Print
 		System.out.println(department);
 		
-	}
-	
-	@Test
-	public void readDepartmentByName(){
-		
-		List<Department> departments = departmentService.findDepartmentByName("e");
-		
-		// Print
-		System.out.println(departments);
 	}
 	
 	@Test

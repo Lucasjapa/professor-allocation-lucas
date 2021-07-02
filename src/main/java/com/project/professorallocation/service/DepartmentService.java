@@ -38,19 +38,17 @@ public class DepartmentService {
 
 
 	//----------------READ----------------
-	public List<Department> findAll(){
-		return departmentRepository.findAll();
+	public List<Department> findAll(String name){
+		if (name == null){
+			return departmentRepository.findAll();
+		}else{
+			return departmentRepository.findByNameContainingIgnoreCase(name);
+		}
 	}
 
 	public Department findById(Long departmentId) throws Exception {
 		
 		return departmentRepository.findById(departmentId).orElseThrow(() -> new Exception("Department does not exist"));
-	}
-	
-	public List<Department> findDepartmentByName(String name){
-
-		List<Department> departments = departmentRepository.findByNameContainingIgnoreCase(name);
-		return departments;
 	}
 	//------------------------------------
 
