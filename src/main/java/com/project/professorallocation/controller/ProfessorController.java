@@ -30,7 +30,6 @@ public class ProfessorController {
     @ApiOperation(value = "Find all Professors")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK"),
-            @ApiResponse(code = 404, message = "Not Found")
     })
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
